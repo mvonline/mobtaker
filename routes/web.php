@@ -11,6 +11,22 @@
 |
 */
 
+use App\Http\Controllers\AuthController;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+
+
+// API route group
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->post('register', 'AuthController@register');
+
+    $router->post('login', 'AuthController@login');
+    $router->get('resetpassword', 'AuthController@generateResetToken');
+    $router->put('resetpassword', 'AuthController@resetPassword');
+    $router->get('password/reset', ['as'=>'password.reset','AuthController@resetPassword']);
+
+
 });
