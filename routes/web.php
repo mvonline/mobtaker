@@ -30,6 +30,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('assignrole', ['middleware'=>['auth','role:admin'],'uses'=>'AuthController@assignRole']);
     $router->post('upload',['middleware'=>['auth','role:admin'],'uses'=>'ExcelController@upload']);
     $router->get('export',['middleware'=>['auth','role:admin'], 'uses'=>'ExcelController@export']);
-
+    $router->get('report',['middleware'=>['auth','role:admin'], 'uses'=>'reportController@generateReport']);
+    $router->get('mail/send',['middleware'=>['auth','role:admin'], 'uses'=>'MailController@send']);
 
 });

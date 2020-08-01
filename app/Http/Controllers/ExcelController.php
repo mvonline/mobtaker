@@ -110,4 +110,5 @@ class ExcelController extends Controller
         return Excel::download(new ExcelExport(), 'info.xlsx');
     }
 
+
 }
