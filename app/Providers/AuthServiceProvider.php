@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,9 +21,10 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Boot the authentication services for the application.
      *
+     * @param GateContract $gate
      * @return void
      */
-    public function boot()
+    public function boot(GateContract $gate)
     {
         // Here you may define how you wish users to be authenticated for your Lumen
         // application. The callback which receives the incoming request instance
@@ -35,5 +36,7 @@ class AuthServiceProvider extends ServiceProvider
                 return User::where('api_token', $request->input('api_token'))->first();
             }
         });
+
+
     }
 }

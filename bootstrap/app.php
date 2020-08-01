@@ -42,6 +42,8 @@ $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 
 $app->alias('mailer', \Illuminate\Contracts\Mail\Mailer::class);
+$app->alias('Excel', Maatwebsite\Excel\Facades\Excel::class);
+
 
  $app->withFacades();
 
@@ -98,6 +100,7 @@ $app->configure('app');
 
  $app->routeMiddleware([
      'auth' => App\Http\Middleware\Authenticate::class,
+     'role' => App\Http\Middleware\RoleMiddleware::class,
  ]);
 
 /*
@@ -115,6 +118,7 @@ $app->configure('app');
  $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+$app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
 
 
 /*

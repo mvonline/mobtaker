@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PasswordReset extends Migration
+class Uploadfiles extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class PasswordReset extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
+        Schema::create('uploads', function (Blueprint $table) {
+            $table->string('file');
+            $table->string('path');
             $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
-
     }
 
     /**
@@ -28,7 +28,6 @@ class PasswordReset extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
-
+        Schema::dropIfExists('uploads');
     }
 }

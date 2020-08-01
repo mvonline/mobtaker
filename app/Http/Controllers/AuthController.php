@@ -92,7 +92,6 @@ class AuthController extends Controller
     public function resetPassword(Request $request)
     {
         // Check input is valid
-        dd('aaa');
         $rules = [
             'token' => 'required',
             'username' => 'required|string',
@@ -136,4 +135,27 @@ class AuthController extends Controller
         return $passwordBrokerManager->broker();
     }
 
+    /**
+     * Store a new user.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function assignRole(Request $request)
+    {
+        $this->validate($request, [
+            'role' => 'required|string',
+            'email' => 'required|email'
+        ]);
+
+        try {
+            $user =User::query()->where('email','=',$request->input('email'))->first();
+            $user->user_type = $request->input('role');
+            $user->update();
+            return response()->json(['user' => $user, 'message' => 'Assigned'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Assign Role Failed!'], 409);
+        }
+
+    }
 }
